@@ -50,6 +50,9 @@ public class Game {
 			currentPlayer.playTurn(environment);
 			if(draw)
 				environment.drawBoard();
+			int state = environment.getState();
+			for(int i = 0; i < NUM_OF_PLAYERS; i++)
+				players[i].updateStateHistory(state);
 		}
 		System.out.println("The Player With " + Environment.getSymbol(environment.getWinner()) + " is the winner");
 	}

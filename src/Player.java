@@ -1,13 +1,17 @@
+import java.util.ArrayList;
+
 public class Player {
 
 	private static int playerIndex = 1;
 	
 	protected int symbol;
 	protected String name;
+	protected ArrayList<Integer> stateHistory;
 	
 	public Player(String name, int symbol) {
 		this.name = name;
 		this.symbol = symbol;
+		stateHistory = new ArrayList<>();
 		playerIndex++;
 	}
 	
@@ -30,6 +34,14 @@ public class Player {
 			j = Game.scanner.nextInt() - 1;
 		}
 		e.place(symbol, i, j);
+	}
+	
+	public void updateStateHistory(int state) {
+		stateHistory.add(state);
+	}
+	
+	public void resetStateHistory() {
+		stateHistory.clear();
 	}
 	
 	public int getSymbol() {
