@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Environment {
 
 	public static final int EMPTY = 0;
@@ -17,6 +19,19 @@ public class Environment {
 	
 	public boolean isEmpty(int i, int j) {
 		return board[i][j] == 0;
+	}
+	
+	public boolean isValid(int i, int j) {
+		return i >= 0 && j >= 0 && i < Environment.LENGTH && j < Environment.LENGTH && isEmpty(i, j);
+	}
+	
+	public ArrayList<int[]> validPositions() {
+		ArrayList<int[]> positions = new ArrayList<>();
+		for(int i = 0; i < LENGTH; i++)
+			for(int j = 0; j < LENGTH; j++)
+				if(isValid(i, j))
+					positions.add(new int[] { i, j });
+		return positions;
 	}
 	
 	public int reward(int symbol) {

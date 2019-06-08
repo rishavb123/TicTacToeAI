@@ -11,10 +11,14 @@ public class Game {
 	
 	private boolean draw;
 	
-	public Game(Player[] players, boolean draw) {
+	public Game(boolean draw, Player... players) {
 		this.players = players;
 		this.draw = draw;
 		environment = new Environment();		
+	}
+	
+	public Game (Player... players) {
+		this(false, players);
 	}
 	
 	public Game(boolean draw) {
@@ -46,9 +50,6 @@ public class Game {
 			currentPlayer.playTurn(environment);
 			if(draw)
 				environment.drawBoard();
-			int state = environment.getState();
-			for(int i = 0; i < NUM_OF_PLAYERS; i++)
-				players[i].updateStateHistory(state);
 		}
 		System.out.println("The Player With " + Environment.getSymbol(environment.getWinner()) + " is the winner");
 	}

@@ -1,19 +1,14 @@
-import java.util.ArrayList;
-
 public class Player {
 
 	private static int playerIndex = 1;
 	
-	private int symbol;
-	private String name;
-	
-	private ArrayList<Integer> stateHistory;
+	protected int symbol;
+	protected String name;
 	
 	public Player(String name, int symbol) {
 		this.name = name;
 		this.symbol = symbol;
 		playerIndex++;
-		stateHistory = new ArrayList<>();
 	}
 	
 	public Player(int symbol) {
@@ -26,7 +21,7 @@ public class Player {
 		int i = Game.scanner.nextInt() - 1;
 		System.out.print("Enter an y index between 1 and " + Environment.LENGTH + ": ");
 		int j = Game.scanner.nextInt() - 1;
-		while(i < 0 || j < 0 || i >= Environment.LENGTH || j >= Environment.LENGTH || !e.isEmpty(i, j))
+		while(!e.isValid(i, j))
 		{
 			System.out.println("Invalid input!");
 			System.out.print("Enter an x index between 1 and " + Environment.LENGTH + ": ");
@@ -37,10 +32,6 @@ public class Player {
 		e.place(symbol, i, j);
 	}
 	
-	public void updateStateHistory(int state) {
-		stateHistory.add(state);
-	}
-
 	public int getSymbol() {
 		return symbol;
 	}
