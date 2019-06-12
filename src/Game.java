@@ -8,17 +8,22 @@ public class Game {
 	private Player[] players;
 	private Environment environment;
 	
-	
+	private boolean verbose;
 	private boolean draw;
 	
-	public Game(boolean draw, Player... players) {
+	public Game(boolean verbose, boolean draw, Environment e, Player... players) {
+		this.verbose = verbose;
 		this.players = players;
 		this.draw = draw;
-		environment = new Environment();		
+		environment = e;		
+	}
+	
+	public Game(boolean draw, Player... players) {
+		this(true, draw, new Environment(), players);		
 	}
 	
 	public Game (Player... players) {
-		this(false, players);
+		this(true, false, new Environment(), players);
 	}
 	
 	public Game(boolean draw) {
@@ -27,11 +32,12 @@ public class Game {
 			players[i] = new Player(Environment.symbols[i + 1]);
 		this.players = players;
 		this.draw = draw;
+		this.verbose = true;
 		environment = new Environment();
 	}
 	
 	public Game() {
-		this(false);
+		this(true);
 	}
 	
 	public void setup() {
@@ -54,7 +60,8 @@ public class Game {
 			for(int i = 0; i < NUM_OF_PLAYERS; i++)
 				players[i].updateStateHistory(state);
 		}
-		System.out.println("The Player With " + Environment.getSymbol(environment.getWinner()) + " is the winner");
+		if(verbose)
+			System.out.println("The Player With " + Environment.getSymbol(environment.getWinner()) + " is the winner");
 	}
 
 	public boolean isDrawing() {

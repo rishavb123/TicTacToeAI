@@ -17,6 +17,12 @@ public class Environment {
 		board = new int[LENGTH][LENGTH];
 	}
 	
+	public void clear() {
+		board = new int[LENGTH][LENGTH];
+		ended = false;
+		winner = 0;
+	}
+	
 	public boolean isEmpty(int i, int j) {
 		return board[i][j] == 0;
 	}
