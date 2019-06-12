@@ -6,6 +6,7 @@ import io.bhagat.util.SerializableUtil;
 public class Application {
 
 	public static void main(String[] args) {
+		String filename = "agent.ser";
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Would you like to train a new agent? (Y/n) ");
 		char c = scanner.nextLine().toLowerCase().charAt(0);
@@ -15,7 +16,7 @@ public class Application {
 			Agent p2 = new Agent(Environment.O);
 			int score = Agent.train(e, p1, p2, 50000);
 			try {
-				SerializableUtil.serialize(p1, "agent.ser");
+				SerializableUtil.serialize(p1, filename);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
@@ -23,7 +24,7 @@ public class Application {
 			System.out.println("Score: " + score);
 		} else {
 			try {
-				p1 = SerializableUtil.deserialize("agent.ser");
+				p1 = SerializableUtil.deserialize(filename);
 			} catch (ClassNotFoundException | IOException e) {
 				e.printStackTrace();
 			}
