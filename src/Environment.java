@@ -41,7 +41,7 @@ public class Environment {
 	}
 	
 	public int reward(int symbol) {
-		return winner == symbol? 1 : 0;
+		return winner == symbol? 1 : winner * symbol;
 	}
 	
 	public int getState() {

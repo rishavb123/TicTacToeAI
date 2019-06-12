@@ -32,7 +32,7 @@ public class Agent extends Player {
 			int index = (int) (Math.random() * positions.size());
 			nextMove = positions.get(index);
 		} else {
-			double bestValue = 0;
+			double bestValue = -10;
 			for(int i = 0; i < Environment.LENGTH; i++)
 				for(int j = 0; j < Environment.LENGTH; j++) {
 					if(e.isEmpty(i, j)) {
