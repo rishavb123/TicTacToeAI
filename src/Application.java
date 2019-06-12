@@ -1,19 +1,38 @@
+import java.io.IOException;
 import java.util.Scanner;
+
+import io.bhagat.util.SerializableUtil;
 
 public class Application {
 
 	public static void main(String[] args) {
-		Environment e = new Environment();
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Would you like to train a new agent? (Y/n) ");
+		char c = scanner.nextLine().toLowerCase().charAt(0);
 		Agent p1 = new Agent(Environment.X);
-		Agent p2 = new Agent(Environment.O);
-		int score = Agent.train(e, p1, p2, 50000);
-		System.out.println("Score: " + score);
-//		p1.setLogging(true);
+		if(c == 'y') {
+			Environment e = new Environment();
+			Agent p2 = new Agent(Environment.O);
+			int score = Agent.train(e, p1, p2, 50000);
+			try {
+				SerializableUtil.serialize(p1, "agent.ser");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+//			p1.setLogging(true);
+			System.out.println("Score: " + score);
+		} else {
+			try {
+				p1 = SerializableUtil.deserialize("agent.ser");
+			} catch (ClassNotFoundException | IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		p1.setEpsilon(0);
 		Game game = new Game(true, p1, new Player("Rishav", Environment.O));
-		Scanner scanner = new Scanner(System.in);
-//		System.out.print("Would you like to play? (Y/N) ");
-		char c = 'y'; // scanner.nextLine().toLowerCase().charAt(0);
+		System.out.print("Would you like to play? (Y/n) ");
+		c = scanner.nextLine().toLowerCase().charAt(0);
 		while(c == 'y') {
 			System.out.println("Playing . . .");
 			game.getEnvironment().clear();

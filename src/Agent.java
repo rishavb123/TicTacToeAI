@@ -1,8 +1,11 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-public class Agent extends Player {
+public class Agent extends Player implements Serializable {
+
+	private static final long serialVersionUID = -2413391241316590719L;
 
 	public static int numOfAgents;
 	
